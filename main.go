@@ -60,6 +60,6 @@ func main() {
 	for _, err := range result.WrappedErrors() {
 		info[err.Error()] = fmt.Sprintf("%+v\n", err)
 	}
-	lg.Sugar().Errorw("multierror test", "error")
+	lg.Sugar().Errorw("multierror test", "error", info)
 	time.Sleep(2 * time.Second)
 }
