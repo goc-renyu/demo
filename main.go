@@ -2,8 +2,8 @@ package main
 
 import (
 	"demo/fun"
-	"errors"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/TheZeroSlave/zapsentry"
@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"github.com/pkg/errors"
 )
 
 func main() {
@@ -55,6 +56,7 @@ func main() {
 		result = multierror.Append(result, err)
 		// lg.Error("OpenFile", zap.Error(err))
 	}
+	result = multierror.Append(result, parseArgs(os.Args[1:]))
 
 	info := make(map[string]interface{})
 	for _, err := range result.WrappedErrors() {
@@ -62,4 +64,11 @@ func main() {
 	}
 	lg.Sugar().Errorw("multierror test", "error", info)
 	time.Sleep(2 * time.Second)
+}
+
+func parseArgs(args []string) error {
+	if len(args) < 3 {
+		return errors.Errorf("not enough arguments, expected at least 3, got %d", len(args))
+	}
+	return nil
 }

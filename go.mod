@@ -15,5 +15,6 @@ require (
 	github.com/TheZeroSlave/zapsentry v1.14.0
 	github.com/getsentry/sentry-go v0.18.0
 	github.com/hashicorp/errwrap v1.0.0 // indirect
+	github.com/pkg/errors v0.9.1
 	go.uber.org/zap v1.24.0
 )
