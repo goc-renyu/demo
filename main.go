@@ -19,6 +19,7 @@ func main() {
 		Dsn:              "https://c3a49d7bfa894fba812faf3f4c0f1c89@o4504353388494848.ingest.sentry.io/4504789533065216",
 		Debug:            true,
 		TracesSampleRate: 1.0,
+		AttachStacktrace: true,
 	})
 	if err != nil {
 		lg.Sugar().Errorf("sentry.Init: %s", err)
