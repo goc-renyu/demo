@@ -3,6 +3,7 @@ package main
 import (
 	"demo/fun"
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/TheZeroSlave/zapsentry"
@@ -55,6 +56,10 @@ func main() {
 		// lg.Error("OpenFile", zap.Error(err))
 	}
 
-	lg.Sugar().Errorw("multierror", "error", result.WrappedErrors())
+	info := make(map[string]interface{})
+	for _, err := range result.WrappedErrors() {
+		info[err.Error()] = fmt.Sprintf("%+v\n", err)
+	}
+	lg.Sugar().Errorw("multierror test", "error")
 	time.Sleep(2 * time.Second)
 }
